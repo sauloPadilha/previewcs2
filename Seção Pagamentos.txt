@@ -1,0 +1,110 @@
+/* Seção Pagamentos */
+.payments {
+  padding: 4em 2em;
+  background: rgba(26, 26, 26, 0.8); /* Fundo semitransparente */
+  text-align: center;
+  border-radius: 8px; /* Bordas arredondadas */
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.5); /* Sombra */
+}
+
+.payments h2 {
+  font-size: 2.8em; /* Título maior */
+  margin-bottom: 1.5em;
+  color: rgba(255, 0, 0, 0.9); /* Vermelho translúcido */
+}
+
+.payment-options {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2em; /* Espaçamento entre as opções */
+}
+
+.payment-qr {
+  text-align: center; /* Centraliza o conteúdo */
+  margin-top: 2em; /* Adiciona espaçamento acima */
+}
+
+.payment-qr h3 {
+  font-size: 1.8em;
+  margin-bottom: 1em; /* Espaçamento entre o título e o QR Code */
+  color: rgba(255, 0, 0, 0.9); /* Vermelho translúcido */
+}
+
+.payment-qr img {
+  width: 200px; /* Define a largura da imagem */
+  height: auto; /* Mantém a proporção */
+  border-radius: 8px; /* Opcional: Bordas arredondadas */
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.5); /* Sombra para destaque */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transições para hover */
+}
+
+.payment-qr img:hover {
+  transform: scale(1.05); /* Leve aumento no hover */
+  box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.6); /* Intensifica a sombra no hover */
+}
+
+.pix-key {
+  text-align: center; /* Centraliza o texto e botão */
+  margin-top: 1em; /* Espaçamento entre o QR Code e a chave PIX */
+}
+
+.pix-key p {
+  font-size: 1.5em;
+  color: rgba(255, 255, 255, 0.9); /* Texto branco translúcido */
+  margin-bottom: 0.5em; /* Espaçamento abaixo do título */
+}
+
+.pix-key-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1em; /* Espaçamento entre a chave e o botão */
+  font-size: 1.2em;
+  color: rgba(221, 221, 221, 0.9); /* Cinza claro translúcido */
+}
+
+.copy-btn {
+  padding: 0.5em 1em;
+  font-size: 1em;
+  font-weight: bold;
+  background: rgba(255, 76, 76, 0.8); /* Vermelho translúcido */
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.3s ease;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3); /* Sombra */
+}
+
+.copy-btn:hover {
+  background: rgba(204, 0, 0, 0.9); /* Escurece no hover */
+  transform: translateY(-3px); /* Elevação no hover */
+}
+
+.payment-card {
+  background: rgba(42, 42, 42, 0.8); /* Fundo semitransparente */
+  padding: 2em;
+  border-radius: 10px;
+  width: 300px;
+  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.5); /* Sombra para destaque */
+  text-align: center;
+  color: #fff;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.payment-card:hover {
+  transform: translateY(-5px); /* Elevação no hover */
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.6); /* Intensifica a sombra */
+}
+
+.payment-card h3 {
+  font-size: 1.8em; /* Texto maior */
+  margin-bottom: 0.8em;
+  color: rgba(255, 76, 76, 0.9); /* Vermelho translúcido */
+}
+
+.payment-card p {
+  font-size: 1.2em; /* Texto maior */
+  color: rgba(221, 221, 221, 0.8); /* Cinza claro translúcido */
+}
