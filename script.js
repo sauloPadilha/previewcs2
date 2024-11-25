@@ -2,18 +2,20 @@
 function openModal(id) {
   const modal = document.getElementById(id);
   if (modal) {
-      modal.style.display = 'flex';
+    modal.style.display = 'flex';
+    modal.setAttribute('aria-hidden', 'false');
   } else {
-      console.error(`Modal com ID "${id}" não encontrado.`);
+    console.error(`Modal com ID "${id}" não encontrado.`);
   }
 }
 
 function closeModal(id) {
   const modal = document.getElementById(id);
   if (modal) {
-      modal.style.display = 'none';
+    modal.style.display = 'none';
+    modal.setAttribute('aria-hidden', 'true');
   } else {
-      console.error(`Modal com ID "${id}" não encontrado.`);
+    console.error(`Modal com ID "${id}" não encontrado.`);
   }
 }
 
@@ -27,30 +29,27 @@ function switchTable(tableId) {
   const tables = document.querySelectorAll('.pricing-table');
   const buttons = document.querySelectorAll('.btn-toggle');
 
-  // Verificar se as tabelas e os botões existem
   if (tables.length === 0 || buttons.length === 0) {
-      console.error("Tabelas ou botões de troca não encontrados.");
-      return;
+    console.error("Tabelas ou botões de troca não encontrados.");
+    return;
   }
 
-  // Remove a classe "active" de todas as tabelas e botões
   tables.forEach(table => table.classList.remove('active'));
   buttons.forEach(button => button.classList.remove('active'));
 
-  // Ativa a tabela e o botão clicado
   const activeTable = document.getElementById(tableId);
-  const activeButton = document.querySelector(`button[onclick="switchTable('${tableId}')"]`);
+  const activeButton = document.querySelector(`button[data-table="${tableId}"]`);
 
   if (activeTable) {
-      activeTable.classList.add('active');
+    activeTable.classList.add('active');
   } else {
-      console.error(`Tabela com ID "${tableId}" não encontrada.`);
+    console.error(`Tabela com ID "${tableId}" não encontrada.`);
   }
 
   if (activeButton) {
-      activeButton.classList.add('active');
+    activeButton.classList.add('active');
   } else {
-      console.error(`Botão associado à tabela "${tableId}" não encontrado.`);
+    console.error(`Botão associado à tabela "${tableId}" não encontrado.`);
   }
 }
 
@@ -61,67 +60,71 @@ document.addEventListener('DOMContentLoaded', () => {
   const menuToggle = document.querySelector('.menu-toggle');
   const navMenu = document.querySelector('.nav-links');
 
-  // Alternar páginas
   navLinks.forEach(link => {
-      link.addEventListener('click', (e) => {
-          e.preventDefault();
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
 
-          // Obter o atributo data-page para identificar a página
-          const targetPage = e.target.getAttribute('data-page');
+      const targetPage = e.target.getAttribute('data-page');
 
-          // Alterar as classes "active" das páginas
-          pages.forEach(page => {
-              if (page.id === targetPage) {
-                  page.classList.add('active');
-              } else {
-                  page.classList.remove('active');
-              }
-          });
-
-          // Alterar as classes "active" dos links de navegação
-          navLinks.forEach(nav => nav.classList.remove('active'));
-          link.classList.add('active');
-
-          // Fechar o menu responsivo (se aberto)
-          if (navMenu.classList.contains('active')) {
-              navMenu.classList.remove('active');
-          }
+      pages.forEach(page => {
+        page.id === targetPage
+          ? page.classList.add('active')
+          : page.classList.remove('active');
       });
+
+      navLinks.forEach(nav => nav.classList.remove('active'));
+      link.classList.add('active');
+
+      if (navMenu.classList.contains('active')) {
+        navMenu.classList.remove('active');
+        menuToggle.setAttribute('aria-expanded', 'false');
+      }
+    });
   });
 
   // Controle do menu responsivo
   if (menuToggle && navMenu) {
-      menuToggle.addEventListener('click', () => {
-          navMenu.classList.toggle('active');
-      });
+    menuToggle.addEventListener('click', () => {
+      const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true';
+      menuToggle.setAttribute('aria-expanded', !isExpanded);
+      navMenu.classList.toggle('active');
+    });
   } else {
-      console.error("Menu toggle ou links de navegação não encontrados.");
+    console.error("Menu toggle ou links de navegação não encontrados.");
   }
 });
 
-// Scroll suave ao topo quando necessário
+// Scroll suave ao topo
 const scrollToTopBtn = document.querySelector('.btn-float');
 if (scrollToTopBtn) {
   scrollToTopBtn.addEventListener('click', scrollToTop);
 }
 
+// Copiar chave PIX
 function copyPixKey() {
-  const pixKey = document.getElementById("pix-key").innerText;
-  navigator.clipboard.writeText(pixKey).then(() => {
-    alert("Chave PIX copiada para a área de transferência!");
-  }).catch(err => {
-    alert("Erro ao copiar a chave PIX.");
-  });
+  const pixKey = document.getElementById("pix-key");
+  if (pixKey) {
+    navigator.clipboard.writeText(pixKey.innerText).then(() => {
+      alert("Chave PIX copiada para a área de transferência!");
+    }).catch(() => {
+      alert("Erro ao copiar a chave PIX.");
+    });
+  } else {
+    console.error("Elemento com ID 'pix-key' não encontrado.");
+  }
 }
 
-function copyPixKey() {
-  // Obtém a chave PIX
-  const pixKey = document.getElementById("pix-key").textContent;
+// Alternar menu
+function toggleMenu() {
+  const menu = document.getElementById('menu');
+  const button = document.querySelector('.menu-toggle');
 
-  // Copia a chave PIX para a área de transferência
-  navigator.clipboard.writeText(pixKey).then(() => {
-      alert("Chave PIX copiada com sucesso!");
-  }).catch((err) => {
-      alert("Erro ao copiar a chave PIX: " + err);
-  });
+  if (menu && button) {
+    const isExpanded = button.getAttribute('aria-expanded') === 'true';
+    button.setAttribute('aria-expanded', !isExpanded);
+    menu.classList.toggle('active');
+    menu.setAttribute('aria-hidden', isExpanded);
+  } else {
+    console.error("Menu ou botão de toggle não encontrado.");
+  }
 }
