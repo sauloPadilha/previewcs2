@@ -100,7 +100,7 @@ header {
   background-color: rgba(224, 7, 7, 0.199);
   border: 0px solid rgba(255, 255, 255, 0.2);
   border-radius: 4px;
-  color: #f80707;
+  color: #ffffff;
   font-size: 1.2em;
   padding: 0.4em 0.4em;
   cursor: pointer;
@@ -111,6 +111,7 @@ header {
   right: 20px;
   z-index: 1000;
   display: none;
+  position: static;
 }
 
 .menu-toggle:hover {
@@ -124,15 +125,15 @@ header {
 
 @media (max-width: 768px) {
   .menu-toggle {
-      display: block;
+      display:flex;
   }
 
   .nav-links {
       flex-direction: column;
-      position: absolute;
-      top: 100%;
+      position:relative;
+      top: 10%;
       right: 0;
-      width: 100%;
+      width: 50px;
       background: rgba(0, 0, 0, 0.418);
       display: none;
   }

@@ -116,15 +116,28 @@ function copyPixKey() {
 
 // Alternar menu
 function toggleMenu() {
-  const menu = document.getElementById('menu');
-  const button = document.querySelector('.menu-toggle');
+  const menu = document.getElementById('menu'); // ID do menu
+  const button = document.querySelector('.menu-toggle'); // Botão clicado
 
   if (menu && button) {
     const isExpanded = button.getAttribute('aria-expanded') === 'true';
     button.setAttribute('aria-expanded', !isExpanded);
-    menu.classList.toggle('active');
-    menu.setAttribute('aria-hidden', isExpanded);
+
+    if (!isExpanded) {
+      // Obter posição do botão
+      const buttonRect = button.getBoundingClientRect();
+
+      // Posicionar o menu dinamicamente
+      menu.style.top = `${buttonRect.bottom + window.scrollY}px`;
+      menu.style.left = `${buttonRect.left}px`;
+
+      menu.classList.add('active');
+      menu.setAttribute('aria-hidden', 'false');
+    } else {
+      menu.classList.remove('active');
+      menu.setAttribute('aria-hidden', 'true');
+    }
   } else {
-    console.error("Menu ou botão de toggle não encontrado.");
+    console.error("Menu ou botão de alternância não encontrado.");
   }
 }
